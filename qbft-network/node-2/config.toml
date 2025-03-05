@@ -1,10 +1,11 @@
 data-path="./data"
+data-storage-format="FOREST"
 genesis-file="../genesis.json" 
 bootnodes=["enode://46d8c978dafa9094b3d8dc7eee1acf49dae9cec66a0fe2e729d3ef5447d56cc50c2a8515ea9432c825d19180c5eb1dea0b8175f29c7b1c448b5fc44f34760571@127.0.0.1:30303"]
 rpc-http-enabled=true 
 rpc-http-api=["ETH","NET","QBFT"] 
 host-allowlist=["*"] 
 rpc-http-cors-origins=["all"] 
-rpc-http-port="8548" 
-p2p-port="30306" 
+rpc-http-port="8546" 
+p2p-port="30304" 
 profile="ENTERPRISE"
