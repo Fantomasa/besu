@@ -9,3 +9,5 @@ rpc-http-cors-origins=["all"]
 rpc-http-port="8548" 
 p2p-port="30306" 
 profile="ENTERPRISE"
+miner-enabled=true
+miner-coinbase="0x02A82bE03b5a4A38258bF176e99551d2afe7e452"

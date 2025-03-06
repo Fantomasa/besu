@@ -12,7 +12,8 @@
     "qbft": {
       "blockperiodseconds": 2,
       "epochlength": 30000,
-      "requesttimeoutseconds": 4
+      "requesttimeoutseconds": 4,
+      "blockreward": "5000000000000000"
     },
     "currencySymbol": "ANKR"
   },
@@ -21,6 +22,7 @@
   "gasLimit": "0x29b92700",
   "difficulty": "0x1",
   "mixHash": "0x63746963616c2062797a616e74696e65206661756c7420746f6c6572616e6365",
+  "coinbase": "0x0000000000000000000000000000000000000000",
   "alloc": {
     "fe3b557e8fb62b89f4916b721be55ceb828dbd73": {
       "privateKey": "8f2a55949038a9610f50fb23b5883af3b4ecb3c3bb792cbcefbd1542c692be63",
