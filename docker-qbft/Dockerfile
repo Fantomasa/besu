@@ -7,6 +7,7 @@ RUN apt-get install -y --no-install-recommends \
   git \
   curl \
   unzip \
+  wget \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -16,5 +17,7 @@ RUN git clone https://github.com/hyperledger/besu
 WORKDIR /app/besu
 
 RUN chmod +x gradlew && ./gradlew installDist
+
+WORKDIR /app/besu/qbft-network/node
 
 CMD ["./build/install/besu/bin/besu", "--config-file=./config.toml"]
