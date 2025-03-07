@@ -1,8 +1,14 @@
 {
   "config": {
-    "chainId": 1337,
+    "chainId": 268,
     "londonBlock": 0,
     "berlinBlock": 0,
+    "istanbulBlock": 0,
+    "muirGlacierBlock": 0,
+    "constantinopleBlock": 0,
+    "petersburgBlock": 0,
+    "byzantiumBlock": 0,
+    "homesteadBlock": 0,
     "qbft": {
       "blockperiodseconds": 2,
       "epochlength": 30000,

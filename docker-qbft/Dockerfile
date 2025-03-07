@@ -20,4 +20,12 @@ RUN chmod +x gradlew && ./gradlew installDist
 
 WORKDIR /app/besu/qbft-network/node
 
+RUN mkdir data
+
+COPY ./config/config.toml /app/besu/qbft-network/node
+
+COPY ./config/genesis.json /app/besu/qbft-network/node
+
+WORKDIR /app
+
 CMD ["./build/install/besu/bin/besu", "--config-file=./config.toml"]

@@ -1,0 +1,8 @@
+services:
+  besu:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8545:8545"
+      - "30303:30303"
