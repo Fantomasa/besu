@@ -1,8 +1,109 @@
 services:
-  besu:
+  node1:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./Dockerfile
+    command:
+      [
+        "./build/install/besu/bin/besu",
+        "--config-file=./qbft-network/node-1/config.toml",
+        "--data-path=./qbft-network/node-1/data",
+        "--genesis-file=./qbft-network/genesis.json"
+      ]
+    volumes:
+      - .:/app
     ports:
       - "8545:8545"
       - "30303:30303"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "-X",
+          "POST",
+          "--data",
+          '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}',
+          "http://localhost:8545",
+          "-H",
+          '"Content-Type: application/json"'
+        ]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    networks:
+      besu_network:
+        ipv4_address: 172.20.0.11
+  node2:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command:
+      [
+        "./build/install/besu/bin/besu",
+        "--config-file=./qbft-network/node-2/config.toml",
+        "--data-path=./qbft-network/node-2/data",
+        "--genesis-file=./qbft-network/genesis.json"
+      ]
+    volumes:
+      - .:/app
+    ports:
+      - "8546:8546"
+      - "30304:30304"
+    depends_on:
+      node1:
+        condition: service_healthy
+    networks:
+      besu_network:
+        ipv4_address: 172.20.0.12
+  node3:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command:
+      [
+        "./build/install/besu/bin/besu",
+        "--config-file=./qbft-network/node-3/config.toml",
+        "--data-path=./qbft-network/node-3/data",
+        "--genesis-file=./qbft-network/genesis.json"
+      ]
+    volumes:
+      - .:/app
+    ports:
+      - "8547:8547"
+      - "30305:30305"
+    depends_on:
+      node1:
+        condition: service_healthy
+    networks:
+      besu_network:
+        ipv4_address: 172.20.0.13
+  node4:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command:
+      [
+        "./build/install/besu/bin/besu",
+        "--config-file=./qbft-network/node-4/config.toml",
+        "--data-path=./qbft-network/node-4/data",
+        "--genesis-file=./qbft-network/genesis.json"
+      ]
+    volumes:
+      - .:/app
+    ports:
+      - "8548:8548"
+      - "30306:30306"
+    depends_on:
+      node1:
+        condition: service_healthy
+    networks:
+      besu_network:
+        ipv4_address: 172.20.0.14
+
+networks:
+  besu_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24

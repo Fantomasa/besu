@@ -34,3 +34,4 @@ jitpack.yml
 /qbft-network/*/data/caches*
 /qbft-network/*/data/database*
 /qbft-network/*/data/version*
+/qbft-network/*/data/besu*

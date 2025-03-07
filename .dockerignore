@@ -5,6 +5,7 @@
 build
 kubernetes
 Dockerfile
+docker-compose.yaml
 
 #Exclude doc related resources
 docs
