@@ -31,4 +31,6 @@ site/
 **/src/*/generated
 jitpack.yml
 /ethereum/eth/src/test/resources/tx.csv.gz
-/qbft-network/*/data/*
+/qbft-network/*/data/caches*
+/qbft-network/*/data/database*
+/qbft-network/*/data/version*
