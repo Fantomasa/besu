@@ -9,6 +9,3 @@ rpc-http-cors-origins=["all"]
 rpc-http-port="8545" 
 p2p-port="30303" 
 profile="ENTERPRISE"
-# qbft doesnt support rewards
-# miner-enabled=true
-# miner-coinbase="0x02A82bE03b5a4A38258bF176e99551d2afe7e452"
