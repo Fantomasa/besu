@@ -10,8 +10,6 @@ services:
         "--data-path=./qbft-network/node-1/data",
         "--genesis-file=./qbft-network/genesis.json"
       ]
-    volumes:
-      - .:/app
     ports:
       - "8545:8545"
       - "30303:30303"
@@ -45,8 +43,6 @@ services:
         "--data-path=./qbft-network/node-2/data",
         "--genesis-file=./qbft-network/genesis.json"
       ]
-    volumes:
-      - .:/app
     ports:
       - "8546:8546"
       - "30304:30304"
@@ -67,8 +63,6 @@ services:
         "--data-path=./qbft-network/node-3/data",
         "--genesis-file=./qbft-network/genesis.json"
       ]
-    volumes:
-      - .:/app
     ports:
       - "8547:8547"
       - "30305:30305"
@@ -89,8 +83,6 @@ services:
         "--data-path=./qbft-network/node-4/data",
         "--genesis-file=./qbft-network/genesis.json"
       ]
-    volumes:
-      - .:/app
     ports:
       - "8548:8548"
       - "30306:30306"
