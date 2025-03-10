@@ -44,7 +44,7 @@ cd /besu/qbft-network/node-1
 ```sh
 ./build/install/besu/bin/besu \
   --config-file=./config.toml \
-  -- bootnodes=enode://46d8c978dafa9094b3d8dc7eee1acf49dae9cec66a0fe2e729d3ef5447d56cc50c2a8515ea9432c825d19180c5eb1dea0b8175f29c7b1c448b5fc44f34760571@127.0.0.1:30303
+  --bootnodes=enode://46d8c978dafa9094b3d8dc7eee1acf49dae9cec66a0fe2e729d3ef5447d56cc50c2a8515ea9432c825d19180c5eb1dea0b8175f29c7b1c448b5fc44f34760571@127.0.0.1:30303
 ```
 
 Repeat this for each node (`node-2`, `node-3`, `node-4`), changing the paths accordingly.
@@ -70,6 +70,8 @@ cd besu
 ```
 
 #### **3. Build and Start the Network**
+
+In root repo dir :
 
 ```sh
 docker compose up --build
