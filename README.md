@@ -18,10 +18,6 @@ Depending on the setup method you choose, ensure you have the necessary dependen
 
 Download java JDK: https://www.oracle.com/java/technologies/downloads/#java21
 
-```sh
-sudo apt update && sudo apt install -y openjdk-21-jdk
-```
-
 #### **2. Clone the Repository**
 
 ```sh
