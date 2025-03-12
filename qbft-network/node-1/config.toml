@@ -1,5 +1,5 @@
 data-path="./data"
-data-storage-format="FOREST"
+data-storage-format="BONSAI"
 genesis-file="../genesis.json" 
 bootnodes=[]
 rpc-http-enabled=true 
