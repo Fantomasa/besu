@@ -35,3 +35,4 @@ jitpack.yml
 /qbft-network/*/data/database*
 /qbft-network/*/data/version*
 /qbft-network/*/data/besu*
+.idea
