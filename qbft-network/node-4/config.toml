@@ -1,5 +1,5 @@
 data-path="./data"
-data-storage-format="BONSAI"
+data-storage-format="FOREST"
 genesis-file="../genesis.json" 
 # bootnodes=["enode://46d8c978dafa9094b3d8dc7eee1acf49dae9cec66a0fe2e729d3ef5447d56cc50c2a8515ea9432c825d19180c5eb1dea0b8175f29c7b1c448b5fc44f34760571@127.0.0.1:30303"]
 bootnodes=["enode://46d8c978dafa9094b3d8dc7eee1acf49dae9cec66a0fe2e729d3ef5447d56cc50c2a8515ea9432c825d19180c5eb1dea0b8175f29c7b1c448b5fc44f34760571@172.20.0.11:30303"]
@@ -11,7 +11,4 @@ rpc-http-cors-origins=["all"]
 rpc-http-port="8548" 
 p2p-port="30306" 
 profile="ENTERPRISE"
-# permissions-nodes-contract-enabled=true
-# permissions-nodes-contract-address="0x0000000000000000000000000000000000009999"
-# permissions-nodes-contract-version=2
-# permissions-nodes-config-file-enabled=true
+permissions-nodes-config-file-enabled=true
