@@ -50,8 +50,7 @@ public class PermissionsConfigPrecompiledContract extends AbstractPrecompiledCon
      */
     public String[] readFileFromProject() throws Exception {
         // String projectDir = System.getProperty("user.dir");
-        String c_NODE_ROOT = "NODE_ROOT";
-        String projectDir = System.getenv(c_NODE_ROOT);
+        String projectDir = System.getenv("NODE_ROOT");
         if (projectDir == null) throw new Exception("Project NODE_ROOT env is not set..");
 
         Path filePath = Paths.get(projectDir + "/data", "permissions_config.toml");
