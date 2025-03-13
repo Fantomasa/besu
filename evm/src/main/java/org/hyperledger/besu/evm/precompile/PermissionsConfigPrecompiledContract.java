@@ -9,11 +9,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class PermissionsConfigPrecompiledContract extends AbstractPrecompiledContract {
-
     /**
      * Instantiates a new Abstract precompiled contract.
      *
@@ -33,21 +30,15 @@ public class PermissionsConfigPrecompiledContract extends AbstractPrecompiledCon
     public PrecompileContractResult computePrecompile(
             final Bytes input, @Nonnull final MessageFrame messageFrame) {
         try {
-            System.out.println("First step");
             String[] enodeUrls = readFileFromProject();
 
-            System.out.println("After read file");
-            System.out.println(Arrays.toString(enodeUrls));
-
             Bytes bytes = encodeStringArray(enodeUrls);
-
-            System.out.println("Get bytes step");
 
             return PrecompileContractResult.success(bytes);
         } catch (Exception e) {
             // Handle errors (e.g., file not found)
             Bytes errorMessage = Bytes.wrap(("Failed to read file: " + e.getMessage()).getBytes(StandardCharsets.UTF_8));
-            return PrecompileContractResult.revert(errorMessage);
+            return PrecompileContractResult.success(errorMessage);
         }
     }
 
@@ -58,17 +49,14 @@ public class PermissionsConfigPrecompiledContract extends AbstractPrecompiledCon
      * @throws Exception If the file cannot be read or the nodes-allowlist is not found.
      */
     public String[] readFileFromProject() throws Exception {
-        String projectDir = System.getProperty("user.dir");
-
-        System.out.println("Project dir");
+        // String projectDir = System.getProperty("user.dir");
+        String c_NODE_ROOT = "NODE_ROOT";
+        String projectDir = System.getenv(c_NODE_ROOT);
+        if (projectDir == null) throw new Exception("Project NODE_ROOT env is not set..");
 
         Path filePath = Paths.get(projectDir + "/data", "permissions_config.toml");
 
-        System.out.println("After gettning file path");
-
         java.util.List<String> lines = Files.readAllLines(filePath, StandardCharsets.UTF_8);
-
-        System.out.println("Step Start search for files");
 
         for (String line : lines) {
             if (line.trim().startsWith("nodes-allowlist")) {
@@ -87,17 +75,12 @@ public class PermissionsConfigPrecompiledContract extends AbstractPrecompiledCon
      * @return An array of enode URLs.
      */
     private String[] extractEnodeUrls(final String line) {
-        System.out.println("Extract enodes URLS");
-
         String enodesString = line.trim()
                 .replace("nodes-allowlist=[", "")
                 .replace("]", "");
             
-        System.out.println("Enodes string: " + enodesString);
-        
-        String[] enodes = enodesString.split(", ");
 
-        System.out.println("Enodes");
+        String[] enodes = enodesString.split(", ");
 
         for (int idx = 0; idx < enodes.length; idx++) {
             String enode = enodes[idx];
@@ -116,9 +99,7 @@ public class PermissionsConfigPrecompiledContract extends AbstractPrecompiledCon
      */
     private Bytes encodeStringArray(final String[] stringArray) {
         String joinedString = "[" + String.join(",", stringArray) + "]";
-        System.out.println("Joined string: " + joinedString);
         byte[] byteArray = joinedString.getBytes(StandardCharsets.UTF_8);
-        System.out.println("Bytes out");
         return Bytes.wrap(byteArray);
     }
 }
