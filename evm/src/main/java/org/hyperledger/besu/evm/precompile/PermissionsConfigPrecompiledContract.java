@@ -33,9 +33,15 @@ public class PermissionsConfigPrecompiledContract extends AbstractPrecompiledCon
     public PrecompileContractResult computePrecompile(
             final Bytes input, @Nonnull final MessageFrame messageFrame) {
         try {
+            System.out.println("First step");
             String[] enodeUrls = readFileFromProject();
 
+            System.out.println("After read file");
+            System.out.println(Arrays.toString(enodeUrls));
+
             Bytes bytes = encodeStringArray(enodeUrls);
+
+            System.out.println("Get bytes step");
 
             return PrecompileContractResult.success(bytes);
         } catch (Exception e) {
@@ -53,12 +59,17 @@ public class PermissionsConfigPrecompiledContract extends AbstractPrecompiledCon
      */
     public String[] readFileFromProject() throws Exception {
         String projectDir = System.getProperty("user.dir");
+
+        System.out.println("Project dir");
+
         Path filePath = Paths.get(projectDir + "/data", "permissions_config.toml");
 
-        // Read all lines from the file
+        System.out.println("After gettning file path");
+
         java.util.List<String> lines = Files.readAllLines(filePath, StandardCharsets.UTF_8);
 
-        // Find the line containing "nodes-allowlist"
+        System.out.println("Step Start search for files");
+
         for (String line : lines) {
             if (line.trim().startsWith("nodes-allowlist")) {
                 // Extract the array of enode URLs
@@ -76,11 +87,17 @@ public class PermissionsConfigPrecompiledContract extends AbstractPrecompiledCon
      * @return An array of enode URLs.
      */
     private String[] extractEnodeUrls(final String line) {
+        System.out.println("Extract enodes URLS");
+
         String enodesString = line.trim()
                 .replace("nodes-allowlist=[", "")
                 .replace("]", "");
+            
+        System.out.println("Enodes string: " + enodesString);
         
         String[] enodes = enodesString.split(", ");
+
+        System.out.println("Enodes");
 
         for (int idx = 0; idx < enodes.length; idx++) {
             String enode = enodes[idx];
@@ -99,7 +116,9 @@ public class PermissionsConfigPrecompiledContract extends AbstractPrecompiledCon
      */
     private Bytes encodeStringArray(final String[] stringArray) {
         String joinedString = "[" + String.join(",", stringArray) + "]";
+        System.out.println("Joined string: " + joinedString);
         byte[] byteArray = joinedString.getBytes(StandardCharsets.UTF_8);
+        System.out.println("Bytes out");
         return Bytes.wrap(byteArray);
     }
 }
