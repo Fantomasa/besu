@@ -25,6 +25,10 @@ import javax.annotation.Nonnull;
 
 import org.apache.tuweni.bytes.Bytes;
 
+/**
+ * This class represents a precompiled contract for managing permissions configuration in the EVM.
+ * It extends {@link AbstractPrecompiledContract} to provide specific functionality for permissions.
+ */
 public class PermissionsConfigPrecompiledContract extends AbstractPrecompiledContract {
   /**
    * Instantiates a new Abstract precompiled contract.
@@ -37,7 +41,7 @@ public class PermissionsConfigPrecompiledContract extends AbstractPrecompiledCon
 
   @Override
   public long gasRequirement(final Bytes input) {
-    return 0; // Adjust gas cost as needed
+    return 100L; // Adjust gas cost as needed
   }
 
   @Nonnull
