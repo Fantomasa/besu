@@ -1,0 +1,131 @@
+services:
+  node1:
+    build:
+      dockerfile: ./Dockerfile
+    command:
+      [
+        "./build/install/besu/bin/besu",
+        "--genesis-file=/app/network/genesis.json",
+        "--data-path=/app/network/node/data",
+        "--rpc-http-enabled=true",
+        "--rpc-http-host=0.0.0.0",
+        "--host-allowlist=*",
+        "--rpc-http-cors-origins=*",
+        "--rpc-http-api=ETH,NET,WEB3,DEBUG,ADMIN,PERM,IBFT",
+        "--profile=ENTERPRISE",
+        "--permissions-nodes-config-file-enabled=true"
+      ]
+    ports:
+      - "8545:8545"
+      - "30303:30303"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "-X",
+          "POST",
+          "--data",
+          '{"jsonrpc":"2.0","method":"eth_chainId","params":[],"id":1}',
+          "http://localhost:8545",
+          "-H",
+          '"Content-Type: application/json"'
+        ]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    networks:
+      besu_network:
+        ipv4_address: 172.20.0.11
+  node2:
+    build:
+      dockerfile: ./Dockerfile
+    command:
+      [
+        "./build/install/besu/bin/besu",
+        "--genesis-file=/app/network/genesis.json",
+        "--data-path=/app/network/node/data",
+        "--rpc-http-enabled=true",
+        "--rpc-http-host=0.0.0.0",
+        "--host-allowlist=*",
+        "--rpc-http-cors-origins=*",
+        "--rpc-http-api=ETH,NET,WEB3,DEBUG,ADMIN,PERM,IBFT",
+        "--profile=ENTERPRISE",
+        "--permissions-nodes-config-file-enabled=true"
+      ]
+    ports:
+      - "8546:8545"
+      - "30304:30303"
+    networks:
+      besu_network:
+        ipv4_address: 172.20.0.12
+  # node2:
+  #   build:
+  #     dockerfile: ./Dockerfile
+  #   environment:
+  #     - NODE_ROOT=/app/qbft-network/node-2
+  #   command:
+  #     [
+  #       "./build/install/besu/bin/besu",
+  #       "--config-file=./qbft-network/node-2/config.toml",
+  #       "--data-path=./qbft-network/node-2/data",
+  #       "--genesis-file=./qbft-network/genesis.json"
+  #     ]
+  #   ports:
+  #     - "8546:8546"
+  #     - "30304:30304"
+  #   depends_on:
+  #     node1:
+  #       condition: service_healthy
+  #   networks:
+  #     besu_network:
+  #       ipv4_address: 172.20.0.12
+  # node3:
+  #   build:
+  #     dockerfile: ./Dockerfile
+  #   environment:
+  #     - NODE_ROOT=/app/qbft-network/node-3
+  #   command:
+  #     [
+  #       "./build/install/besu/bin/besu",
+  #       "--config-file=./qbft-network/node-3/config.toml",
+  #       "--data-path=./qbft-network/node-3/data",
+  #       "--genesis-file=./qbft-network/genesis.json"
+  #     ]
+  #   ports:
+  #     - "8547:8547"
+  #     - "30305:30305"
+  #   depends_on:
+  #     node1:
+  #       condition: service_healthy
+  #   networks:
+  #     besu_network:
+  #       ipv4_address: 172.20.0.13
+  # node4:
+  #   build:
+  #     dockerfile: ./Dockerfile
+  #   environment:
+  #     - NODE_ROOT=/app/qbft-network/node-4
+  #   command:
+  #     [
+  #       "./build/install/besu/bin/besu",
+  #       "--config-file=./qbft-network/node-4/config.toml",
+  #       "--data-path=./qbft-network/node-4/data",
+  #       "--genesis-file=./qbft-network/genesis.json"
+  #     ]
+  #   ports:
+  #     - "8548:8548"
+  #     - "30306:30306"
+  #   depends_on:
+  #     node1:
+  #       condition: service_healthy
+  #   networks:
+  #     besu_network:
+  #       ipv4_address: 172.20.0.14
+
+networks:
+  besu_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24

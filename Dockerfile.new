@@ -1,0 +1,22 @@
+FROM ubuntu:24.04
+
+WORKDIR /app
+
+RUN apt-get update && apt-get upgrade -y
+
+RUN apt-get install -y --no-install-recommends \
+  openjdk-21-jdk \
+  git \
+  curl \
+  unzip \
+  wget
+
+COPY . .
+
+RUN mkdir -p /app/network/node/data
+
+COPY /qbft-network/genesis.json /app/network
+
+RUN echo "nodes-allowlist=[]" > /app/network/node/data/permissions_config.toml
+
+RUN chmod +x gradlew && ./gradlew installDist
