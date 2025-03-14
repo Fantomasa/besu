@@ -41,7 +41,7 @@ public class PermissionsConfigPrecompiledContract extends AbstractPrecompiledCon
 
   @Override
   public long gasRequirement(final Bytes input) {
-    return 100L; // Adjust gas cost as needed
+    return 0; // Adjust gas cost as needed
   }
 
   @Nonnull
