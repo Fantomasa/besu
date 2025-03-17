@@ -1,5 +1,7 @@
 data-path="./data"
-data-storage-format="FOREST"
+data-storage-format="BONSAI"
+bonsai-limit-trie-logs-enabled=false
+sync-mode="FULL"
 genesis-file="../genesis.json" 
 bootnodes=[]
 rpc-http-enabled=true 
